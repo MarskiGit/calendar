@@ -17,6 +17,7 @@ class View
         $path = DIR_TEMPLATE . $path . $name . '.php';
         try {
             if (is_file($path)) {
+                $params;
                 require $path;
             } else {
                 throw new AppException('Błąd otwarcia szablonu' . $name . ' in: ' . $path);
@@ -30,9 +31,9 @@ class View
         header('Content-type: text/html; charset=utf-8');
         $this->renderHTML('layout', '', $params);
     }
-    public function home(): void
+    public function home($calender): void
     {
-        $this->renderHTML('home', 'page/');
+        $this->renderHTML('home', 'page/', $calender);
     }
     public function footer(): void
     {

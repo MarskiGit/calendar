@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Idea\database;
+namespace App\database;
 
 use Exception;
 use PDO;

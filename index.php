@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-require_once("src/utils/debug.php");
+require_once("utils/debug.php");
 require_once('config/config.php');
 spl_autoload_register(function (string $classNamespace) {
     $path = str_replace(['\\', 'App/'], ['/', ''], $classNamespace);
