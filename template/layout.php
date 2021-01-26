@@ -14,7 +14,6 @@
     <meta name="author" content="Mariusz Kępski">
     <meta name="copyright" content="Copyright owner">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="shortcut icon" href="public/img/idea.png" type="image/x-icon" sizes="16x16">
     <link rel="stylesheet" href="public/style/layout.min.css" type="text/css" media="all">
 
 
