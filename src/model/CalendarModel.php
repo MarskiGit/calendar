@@ -23,6 +23,18 @@ class CalendarModel extends AbstractModel
             $this->renderCalendar();
         }
     }
+    private function lastDay()
+    {
+        $this->lastDay = idate('d', mktime(23, 59, 59, $this->month + 1, 0, $this->year));
+    }
+    private function firstDay()
+    {
+        $this->firstDay = idate('w', mktime(0, 0, 0, $this->month, 1, $this->year));
+    }
+    private function dayNumber($w)
+    {
+        return date('w', mktime(0, 0, 0, $this->month, 1 - $this->firstDay + $w, $this->year));
+    }
     private function renderCalendar()
     {
         $this->firstDay();
@@ -32,8 +44,7 @@ class CalendarModel extends AbstractModel
         echo '<tr>';
 
         foreach ($this->weekorder as $w) {
-            $dayname = date('w', mktime(0, 0, 0, $this->month, 1 - $this->firstDay + $w, $this->year));
-            echo "<th>" . $this->dayName[$dayname] . "</th>";
+            echo "<th>" . $this->dayName[$this->dayNumber($w)] . "</th>";
         }
         echo "</tr>";
         $onday = 0;
@@ -42,11 +53,9 @@ class CalendarModel extends AbstractModel
         while ($onday <= $this->lastDay) {
             echo '<tr>';
             foreach ($this->weekorder as $d) {
-                if ($started) {
-                    if ($d === $this->firstDay) {
-                        $started = false;
-                        $onday++;
-                    }
+                if ($started && $d === $this->firstDay) {
+                    $started = false;
+                    $onday++;
                 }
                 if ($onday === 0 || $onday > $this->lastDay) {
                     echo '<td>&nbsp;</td>';
@@ -58,13 +67,5 @@ class CalendarModel extends AbstractModel
             echo "</tr>";
         }
         echo '</table>';
-    }
-    private function lastDay()
-    {
-        $this->lastDay = idate('d', mktime(23, 59, 59, $this->month + 1, 0, $this->year));
-    }
-    private function firstDay()
-    {
-        $this->firstDay = idate('w', mktime(0, 0, 0, $this->month, 1, $this->year));
     }
 }
