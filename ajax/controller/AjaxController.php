@@ -16,13 +16,10 @@ class AjaxController
     private AjaxView $AjaxView;
     private array $requestParam;
 
-
     public function __construct(PhpInput $PhpInput, AjaxView $AjaxView)
     {
         $this->PhpInput = $PhpInput;
         $this->AjaxView = $AjaxView;
-
-
         $this->run();
     }
     private function run(): void

@@ -9,7 +9,7 @@ use Ajax\model\AjaxAbstractModel;
 class CalendarModel extends AjaxAbstractModel
 {
     protected array $weekorder = [1, 2, 3, 4, 5, 6, 0];
-    protected array $monthName = ['Styczeń', 'Luty', 'Marzec', 'Kiwecizeń', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
+    protected array $monthName = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
     protected int $firstDayMonth;
     protected int $lastDayMonth;
     protected array $renderMonth = [];
