@@ -26,8 +26,5 @@ The calendar aims to streamline and organize my time. There are many calendars, 
 ## Status
 Project is: in progress
 
-## Inspiration
-Add here credits. Project inspired by..., based on...
-
 ## Contact
 Created by [@marskipl](https://marski.pl/) - feel free to contact me!
