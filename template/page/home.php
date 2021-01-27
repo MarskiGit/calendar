@@ -1,6 +1,6 @@
 <main>
     <h1>Kalendarz</h1>
+    <button>Test</button>
     <section class="calendar_container">
-        <?php $params->fullYear(); ?>
     </section>
 </main>

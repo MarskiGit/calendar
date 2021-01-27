@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="public/style/layout.min.css" type="text/css" media="all">
     <link rel="stylesheet" href="public/style/calendar.min.css" type="text/css" media="all">
 
+    <script defer type="module" src="public/script/calendar.js"></script>
 
 </head>
 

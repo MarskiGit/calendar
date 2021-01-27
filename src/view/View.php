@@ -31,9 +31,9 @@ class View
         header('Content-type: text/html; charset=utf-8');
         $this->renderHTML('layout', '', $params);
     }
-    public function home($calender): void
+    public function home(): void
     {
-        $this->renderHTML('home', 'page/', $calender);
+        $this->renderHTML('home', 'page/');
     }
     public function footer(): void
     {
