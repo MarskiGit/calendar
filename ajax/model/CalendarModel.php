@@ -13,21 +13,19 @@ class CalendarModel extends AjaxAbstractModel
     protected int $firstDayMonth;
     protected int $lastDayMonth;
     protected array $renderMonth = [];
-    protected array $renderYear = [];
 
     public function oneMonth(): array
     {
-        $this->renderCalendar();
-        return $this->renderMonth;
+        $this->calendar();
+        return $this->render();
     }
     public function fullYear(): array
     {
         foreach (range(1, 12) as $m) {
             $this->month = $m;
-            $this->renderCalendar();
+            $this->calendar();
         }
-        $this->renderYear[] = $this->renderMonth;
-        return $this->renderYear;
+        return $this->render();
     }
     private function firstDayMonth(): void
     {
@@ -37,7 +35,16 @@ class CalendarModel extends AjaxAbstractModel
     {
         $this->lastDayMonth = idate('d', mktime(23, 59, 59, $this->month + 1, 0, $this->year));
     }
-    private function renderCalendar(): void
+    private function render(): array
+    {
+        $render[] = [
+            'year' => $this->year,
+            'day_name' => ['Pon', 'Wto', 'Śro', 'Czw', 'Pią', 'Sob', 'Nie'],
+            'params_month' => $this->renderMonth
+        ];
+        return  $render;
+    }
+    private function calendar(): void
     {
         $onday = 0;
         $started = true;
@@ -46,10 +53,9 @@ class CalendarModel extends AjaxAbstractModel
 
         $paramsMonth = [
             'month' => $this->monthName[$this->month - 1],
-            'year' => "$this->year",
-            'day_name' => ['Pon', 'Wto', 'Śro', 'Czw', 'Pią', 'Sob', 'Nie'],
             'day_number' => []
         ];
+
         while ($onday <= $this->lastDayMonth) {
             foreach ($this->weekorder as $d) {
                 if ($started && $d === $this->firstDayMonth) {

@@ -10,7 +10,7 @@
 * [Contact](#contact)
 
 ## General info
-The calendar aims to streamline and organize my time. There are many calendars, but I want to write my own. 
+Calendar of important events with a view for the whole year or month. There are many calendars, but I want to write my own. 
 
 ## Technologies
 * PHP 7 / 8

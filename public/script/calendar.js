@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
         constructor() {
             this.btn = document.querySelector('button');
             this.request = {
-                action: 'fullYear',
-                year: '2024',
+                action: 'oneMonth',
+                year: '2021',
                 month: '1'
             };
             this.start()
