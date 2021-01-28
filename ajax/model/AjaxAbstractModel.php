@@ -13,14 +13,14 @@ abstract class AjaxAbstractModel
 {
     protected ?PDO $DB;
     protected array $requestParam;
-    protected int $month;
-    protected int $year;
+    protected int $monthRequest;
+    protected int $yearRequest;
     public function __construct(array $requestParam)
     {
         $this->DB = DB::conn();
         $this->requestParam = $requestParam;
-        $this->month = intval($this->requestParam['month']);
-        $this->year = intval($this->requestParam['year']);
+        $this->monthRequest  = intval($this->requestParam['month']);
+        $this->yearRequest  = intval($this->requestParam['year']);
     }
     protected function notification($message): array
     {

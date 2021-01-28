@@ -2,74 +2,79 @@
 
 declare(strict_types=1);
 
+
 namespace Ajax\model;
 
 use Ajax\model\AjaxAbstractModel;
 
 class CalendarModel extends AjaxAbstractModel
 {
-    protected array $weekorder = [1, 2, 3, 4, 5, 6, 0];
+    protected array $dayNameMarker  = [1, 2, 3, 4, 5, 6, 0];
     protected array $monthName = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
     protected int $firstDayMonth;
     protected int $lastDayMonth;
-    protected array $renderMonth = [];
+    protected array $month = [];
 
     public function oneMonth(): array
     {
-        $this->calendar();
-        return $this->render();
+        $this->renderMonth();
+        return $this->get();
     }
     public function fullYear(): array
     {
         foreach (range(1, 12) as $m) {
-            $this->month = $m;
-            $this->calendar();
+            $this->monthRequest  = $m;
+            $this->renderMonth();
         }
-        return $this->render();
+        return $this->get();
     }
-    private function firstDayMonth(): void
+    private function firstDayMonth(): int
     {
-        $this->firstDayMonth = idate('w', mktime(0, 0, 0, $this->month, 1, $this->year));
+        return idate('w', mktime(0, 0, 0, $this->monthRequest, 1, $this->yearRequest));
     }
-    private function lastDayMonth(): void
+    private function lastDayMonth(): int
     {
-        $this->lastDayMonth = idate('d', mktime(23, 59, 59, $this->month + 1, 0, $this->year));
+        return idate('d', mktime(23, 59, 59, $this->monthRequest  + 1, 0, $this->yearRequest));
     }
-    private function render(): array
+    private function getMonthName(): string
+    {
+        return $this->monthName[$this->monthRequest  - 1];
+    }
+    private function get(): array
     {
         $render[] = [
-            'year' => $this->year,
+            'year' => $this->yearRequest,
+            'time_zone' => date_default_timezone_get(),
             'day_name' => ['Pon', 'Wto', 'Śro', 'Czw', 'Pią', 'Sob', 'Nie'],
-            'params_month' => $this->renderMonth
+            'params_month' => $this->month
         ];
         return  $render;
     }
-    private function calendar(): void
+    private function renderMonth(): void
     {
+
+        $this->firstDayMonth = $this->firstDayMonth();
+        $this->lastDayMonth = $this->lastDayMonth();
+
+        $paramsMonth = ['month' => $this->getMonthName()];
+
         $onday = 0;
         $started = true;
-        $this->firstDayMonth();
-        $this->lastDayMonth();
-
-        $paramsMonth = [
-            'month' => $this->monthName[$this->month - 1],
-            'day_number' => []
-        ];
 
         while ($onday <= $this->lastDayMonth) {
-            foreach ($this->weekorder as $d) {
+            foreach ($this->dayNameMarker  as $d) {
                 if ($started && $d === $this->firstDayMonth) {
                     $started = false;
                     $onday++;
                 }
                 if ($onday === 0 || $onday > $this->lastDayMonth) {
-                    array_push($paramsMonth['day_number'], 0);
+                    $paramsMonth['day_number'][] = 0;
                 } else {
-                    array_push($paramsMonth['day_number'], $onday);
+                    $paramsMonth['day_number'][] = $onday;
                     $onday++;
                 }
             }
         }
-        $this->renderMonth[] = $paramsMonth;
+        $this->month[] = $paramsMonth;
     }
 }

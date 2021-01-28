@@ -9,9 +9,11 @@ document.addEventListener('DOMContentLoaded', function () {
     class ViewCalendar {
         constructor() {
             this.btn = document.querySelector('button');
+            this.date = new Date;
+            this.year = this.date.getFullYear()
             this.request = {
-                action: 'oneMonth',
-                year: '2021',
+                action: 'fullyear',
+                year: `${this.year}`,
                 month: '1'
             };
             this.start()
@@ -24,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         sendRequest() {
 
-            dataFetch('ajax.php', this.request).then(data => {
-                console.log(data)
+            dataFetch('ajax.php', this.request).then(calendarData => {
+                console.log(calendarData)
             }).finally(console.log('fin'));
         };
     }

@@ -28,7 +28,6 @@ class View
     }
     public function layout($params): void
     {
-        header('Content-type: text/html; charset=utf-8');
         $this->renderHTML('layout', '', $params);
     }
     public function home(): void

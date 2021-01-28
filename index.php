@@ -1,7 +1,10 @@
 <?php
 
 declare(strict_types=1);
-require_once("utils/debug.php");
+date_default_timezone_set(ini_get('date.timezone'));
+header('Content-type: text/html; charset=utf-8');
+
+require_once('utils/debug.php');
 require_once('config/config.php');
 spl_autoload_register(function (string $classNamespace) {
     $path = str_replace(['\\', 'App/'], ['/', ''], $classNamespace);
