@@ -42,7 +42,7 @@ class CalendarModel extends AjaxAbstractModel
     }
     private function get(): array
     {
-        $render[] = [
+        $render = [
             'year' => $this->yearRequest,
             'time_zone' => date_default_timezone_get(),
             'day_name' => ['Pon', 'Wto', 'Śro', 'Czw', 'Pią', 'Sob', 'Nie'],
