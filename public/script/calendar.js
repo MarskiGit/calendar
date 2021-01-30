@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
             this.sendRequest()
         }
         sendRequest() {
-            this.h1.innerText = `${this.year}`
             dataFetch('ajax.php', this.request).then(calendarData => {
                 (calendarData.exception) ? displayException(calendarData): this.renderMonth(calendarData);
             }).finally(console.log('fin'));
@@ -32,19 +31,17 @@ document.addEventListener('DOMContentLoaded', function () {
             time_zone,
             year
         }) {
-            this.dayName = day_name;
+            this.h1.innerText = `${year}`;
             this.paramsMonth = params_month;
             this.timeZone = time_zone;
-            this.year = year;
             if (this.paramsMonth.length) {
                 this.paramsMonth.forEach(({
                     month,
-                    day_number,
-                    month_number
+                    day_number
                 }) => {
                     const div = document.createElement('section');
                     div.className = 'month';
-                    div.setAttribute('data-month', `${month.number}`);
+                    div.setAttribute('data-month', `event`);
                     div.innerHTML = this.renderHtml(month, day_number, day_name);
                     this.calednar.appendChild(div);
                 });
@@ -52,24 +49,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.addDom();
             } else {
                 this.calendarContainer.innerHTML = '<div><h4 class="empty_idea">Brak elementów do wyświetlenia.</h4></div>';
-            }
+            };
         };
         renderHtml(month, day_number, day_name) {
             return (`
                 <h4>${month.name}</h4>
                  <div class="day_name">
-                    ${this.dayNameSpan(day_name)}
+                    ${this.getDayName(day_name)}
                 </div>
-                <div class="day_number">
-                    ${this.dayNumberSpan(day_number)}
+                <div class="day_number" data-month='${month.number}'>
+                    ${this.getDayNumber(day_number)}
                 </div>
         `);
         };
-        dayNumberSpan = day_number => day_number.map(num => (num) ? `<span>${num}</span>` : '<span></span>').join('');
-        dayNameSpan = day_name => day_name.map((name, index) => (index === 5 || index === 6) ? `<span class="week">${name}</span>` : `<span>${name}</span>`).join('');
+        getDayNumber = day_number => day_number.map(num => (num) ? `<span class="active" data-day='${num}'>${num}</span>` : '<span></span>').join('');
+        getDayName = day_name => day_name.map((name, index) => (index === 5 || index === 6) ? `<span class="week">${name}</span>` : `<span>${name}</span>`).join('');
         addDom() {
             this.calendarContainer.appendChild(this.calednar);
         };
-    }
-    const Calendar = new ViewCalendar()
+    };
+
+    const Calendar = new ViewCalendar();
+
 });
