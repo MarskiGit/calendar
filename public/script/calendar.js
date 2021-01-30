@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
             this.h1 = document.querySelector('[data-header="h1"]');
             this.calendarContainer = document.querySelector('[data-calendar="container"]');
             this.calednar = document.createDocumentFragment();
-            this.dayName;
-            this.paramsMonth;
-            this.timeZone;
             this.date = new Date;
             this.year = this.date.getFullYear()
             this.request = {
@@ -24,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
             this.sendRequest()
         }
         sendRequest() {
-            this.h1.innerText = `Kalendarz ${this.year}`
+            this.h1.innerText = `${this.year}`
             dataFetch('ajax.php', this.request).then(calendarData => {
                 (calendarData.exception) ? displayException(calendarData): this.renderMonth(calendarData);
             }).finally(console.log('fin'));
@@ -39,18 +36,17 @@ document.addEventListener('DOMContentLoaded', function () {
             this.paramsMonth = params_month;
             this.timeZone = time_zone;
             this.year = year;
-
             if (this.paramsMonth.length) {
-                this.paramsMonth.forEach(data => {
-                    const {
-                        month,
-                        day_number
-                    } = data;;
-                    this.div = document.createElement('section');
-                    this.div.className = 'month';
-                    this.div.setAttribute('data-month', `${month}`);
-                    this.div.innerHTML = this.renderHtml(month, day_number);
-                    this.calednar.appendChild(this.div);
+                this.paramsMonth.forEach(({
+                    month,
+                    day_number,
+                    month_number
+                }) => {
+                    const div = document.createElement('section');
+                    div.className = 'month';
+                    div.setAttribute('data-month', `${month.number}`);
+                    div.innerHTML = this.renderHtml(month, day_number, day_name);
+                    this.calednar.appendChild(div);
                 });
 
                 this.addDom();
@@ -58,25 +54,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.calendarContainer.innerHTML = '<div><h4 class="empty_idea">Brak elementów do wyświetlenia.</h4></div>';
             }
         };
-        renderHtml(month, day_number) {
+        renderHtml(month, day_number, day_name) {
             return (`
-                <h4>${month}</h4>
+                <h4>${month.name}</h4>
                  <div class="day_name">
-                    ${this.dayNameSpan()}
+                    ${this.dayNameSpan(day_name)}
                 </div>
                 <div class="day_number">
                     ${this.dayNumberSpan(day_number)}
                 </div>
         `);
         };
-        dayNumberSpan(day_number) {
-            const day = day_number.map(num => (num) ? `<span>${num}</span>` : '<span></span>');
-            return day.join('');
-        };
-        dayNameSpan() {
-            const name = this.dayName.map(name => `<span>${name}</span>`);
-            return name.join('');
-        }
+        dayNumberSpan = day_number => day_number.map(num => (num) ? `<span>${num}</span>` : '<span></span>').join('');
+        dayNameSpan = day_name => day_name.map((name, index) => (index === 5 || index === 6) ? `<span class="week">${name}</span>` : `<span>${name}</span>`).join('');
         addDom() {
             this.calendarContainer.appendChild(this.calednar);
         };

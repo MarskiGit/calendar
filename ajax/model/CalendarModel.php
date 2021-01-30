@@ -56,7 +56,10 @@ class CalendarModel extends AjaxAbstractModel
         $this->firstDayMonth = $this->firstDayMonth();
         $this->lastDayMonth = $this->lastDayMonth();
 
-        $paramsMonth = ['month' => $this->getMonthName()];
+        $paramsMonth = ['month' => [
+            'name' => $this->getMonthName(),
+            'number' => $this->monthRequest
+        ]];
 
         $onday = 0;
         $started = true;

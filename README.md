@@ -6,7 +6,7 @@
 * [Technologies](#technologies)
 * [Features](#features)
 * [Status](#status)
-* [Inspiration](#inspiration)
+* [Demo](#demo)
 * [Contact](#contact)
 
 ## General info
@@ -25,6 +25,10 @@ Calendar of important events with a view for the whole year or month. There are 
 
 ## Status
 Project is: in progress
+
+## Demo
+Currently working version (update: 30/01/2021) 
+[Calendar](https://marski.pl/cal)
 
 ## Contact
 Created by [@marskipl](https://marski.pl/) - feel free to contact me!
