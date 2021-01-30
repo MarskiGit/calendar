@@ -28,7 +28,7 @@ Project is: in progress
 
 ## Demo
 Currently working version (update: 30/01/2021) 
-[Calendar](https://marski.pl/cal)
+[Calendar](https://marski.pl/app/cal)
 
 ## Contact
 Created by [@marskipl](https://marski.pl/) - feel free to contact me!
