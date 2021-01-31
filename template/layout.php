@@ -10,7 +10,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="theme-color" content="#e8952b">
-    <meta name="description" content="Pracowniczy prgoram pomysłów">
+    <meta name="description" content="Mój Kalendarz">
     <meta name="author" content="Mariusz Kępski">
     <meta name="copyright" content="Copyright owner">
     <meta name="robots" content="noindex, nofollow">

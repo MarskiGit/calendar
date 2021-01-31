@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
         `);
         };
-        getDayNumber = day_number => day_number.map(num => (num) ? `<span class="active" data-day='${num}'>${num}</span>` : '<span></span>').join('');
         getDayName = day_name => day_name.map((name, index) => (index === 5 || index === 6) ? `<span class="week">${name}</span>` : `<span>${name}</span>`).join('');
+        getDayNumber = day_number => day_number.map(num => (num) ? `<span class="number" data-day='${num}'>${num}</span>` : '<span></span>').join('');
         addDom() {
             this.calendarContainer.appendChild(this.calednar);
         };
